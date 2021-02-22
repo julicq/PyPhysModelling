@@ -30,10 +30,19 @@ def draw_ball(coords):
     circle.draw(window)
 
 
+def check_coords(coords, velocity):
+    if coords.x < 0 or coords.x > SIZE_X:
+        velocity.x = -velocity.x
+
+    if coords.y < 0 or coords.y > SIZE_Y:
+        velocity.y = -velocity.y
+
+
 while True:
     clear_window()
-
     draw_ball(coords)
     coords = add(coords, velocity)
+
+    check_coords(coords, velocity)
 
     gr.time.sleep(0.02)
