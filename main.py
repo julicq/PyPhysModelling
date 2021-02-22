@@ -6,8 +6,8 @@ SIZE_Y = 400
 window = gr.GraphWin("Model", SIZE_X, SIZE_Y)
 
 coords = gr.Point(200, 200)
-
 velocity = gr.Point(1, -2)
+acceleration = gr.Point(0, 0.1)
 
 
 def add(point_1, point_2):
@@ -38,11 +38,20 @@ def check_coords(coords, velocity):
         velocity.y = -velocity.y
 
 
+def update_coords(coords, velocity):
+    return add(coords, velocity)
+
+
+def update_velocity(velocity, acceleration):
+    return add(velocity, acceleration)
+
+
 while True:
     clear_window()
     draw_ball(coords)
-    coords = add(coords, velocity)
 
+    coords = update_coords(coords, velocity)
+    velocity = update_velocity(velocity, acceleration)
     check_coords(coords, velocity)
 
     gr.time.sleep(0.02)
